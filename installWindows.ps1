@@ -74,7 +74,7 @@ Function SetDesktopIcons {
     # Network = {F02C1A0D-BE21-4350-88B0-7367FC96EF3C}
     # RecycleBin  = {645FF040-5081-101B-9F08-00AA002F954E}
     $path="HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel"
-    $icons = "{20D04FE0-3AEA-1069-A2D8-08002B30309D}", "{59031a47-3f72-44a7-89c5-5595fe6b30ee}", "{645FF040-5081-101B-9F08-00AA002F954E}"
+    $icons = "{20D04FE0-3AEA-1069-A2D8-08002B30309D}", "{645FF040-5081-101B-9F08-00AA002F954E}", "{59031a47-3f72-44a7-89c5-5595fe6b30ee}"
 
 
     foreach ($icon in $icons)
