@@ -163,23 +163,10 @@ function InstallPrograms {
     ##Get manufacturer of the PC
     $make = (Get-WmiObject -Class:Win32_ComputerSystem).Manufacturer
 
-    ##Get the path to where it install the manufacturer setup file
-    $location = Get-Location
-    $filename = "\manufacturer.exe"
-    $filepath = "$location$filename"
-
-    ##Remove the previous manufacturer setup from previous installation
-    if(Test-Path -Path $filepath)
-    {
-        Remove-Item manufacturer.exe
-    }
-
-    ##If manufacturer is Dell, download SupportAssist
+    ##If manufacturer is Dell, install SupportAssist
     if($make -eq "Dell Inc.")
     {
-        $WebClient = New-Object System.Net.WebClient
-        $WebClient.DownloadFile("https://downloads.dell.com/serviceability/catalog/SupportAssistInstaller.exe", $filepath)
-        .\manufacturer.exe
+        .\extension\SupportAssistInstaller.exe
     }elseif($make -eq "LENOVO") ##If manufacturer is LENOVO, download Lenovo Commercial Vantage
     {
         winget install "Lenovo Commercial Vantage" --disable-interactivity --accept-package-agreements
