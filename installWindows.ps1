@@ -1,6 +1,17 @@
 #Function to install Winget
 ##Winget is use to install other program directly from the Microsoft Store like Adobe Reader or Lenovo Commercial Vantage
 
+Function isWindows11{
+    $winver = (Get-ComputerInfo).OsName
+
+    if($winver -like "Microsoft Windows 11*"){
+        return 1
+    }
+    elseif ($winver -like "Microsoft Windows 10*"){
+        return 0
+    }
+}
+
 Function Install-WinGet {
     #Install the latest package from GitHub
     [cmdletbinding(SupportsShouldProcess)]
@@ -157,7 +168,12 @@ function SetAlimentationSettings {
 function InstallPrograms {
     # Program
     ##Install Acrobat Reader
-    winget install --id "Adobe.Acrobat.Reader.32-bit" --accept-package-agreements --accept-source-agreements
+    if(isWindows11)
+    {
+        winget install --id "Adobe.Acrobat.Reader.32-bit" --accept-package-agreements --accept-source-agreements
+    }else{
+        Write-Host "Please Install Lenovo Commercial Vantage Manually"
+    }
 
     ##Manufacturer
     ##Get manufacturer of the PC
@@ -169,7 +185,12 @@ function InstallPrograms {
         .\extension\SupportAssistInstaller.exe
     }elseif($make -eq "LENOVO") ##If manufacturer is LENOVO, download Lenovo Commercial Vantage
     {
-        winget install "Lenovo Commercial Vantage" --disable-interactivity --accept-package-agreements
+        if(isWindows11)
+        {
+            winget install "Lenovo Commercial Vantage" --disable-interactivity --accept-package-agreements
+        }else{
+            Write-Host "Please Install Lenovo Commercial Vantage Manually"
+        }
     }
 
     ## Launch Ninite
@@ -243,6 +264,7 @@ function CleanDesktop {
 
 }
 
+
 Clear-Host
 " __      __.__            .___                      _____             "
 "/  \    /  \__| ____    __| _/______  _  ________ _/ ____\___________ "
@@ -255,7 +277,10 @@ Clear-Host
 " |        \|  |_\  ___/\  \___|  |  |  | \(  <_> )  \__(  <_> )  Y Y  \   |    |\  ___/\  \___|   Y  \"
 "/_________/|____/\_____>\_____>__|  |__|   \____/ \_____>____/|__|_|__/   |____| \_____>\_____>___|__/"
 
-Install-WinGet
+if(isWindows11)
+{
+    Install-WinGet
+}
 
 SetDesktopIcons
 
