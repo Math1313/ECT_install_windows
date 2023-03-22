@@ -7,4 +7,4 @@
 7 - Répondre "Oui" puis "Oui à tout" (T)
 8 - Patienter en répondant aux questions additionelles.
 9 - Set-ExecutionPolicy Undefined
-10 - Supprimer le dossier contenant le script et vider la corbeille.
+10 - Supprimer le dossier contenant le script et vider la corbeille
