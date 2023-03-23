@@ -316,17 +316,18 @@ function SetDefaultApps {
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
 function CleanDesktop {
+
+    $DesktopPath = [Environment]::GetFolderPath("Desktop")
     # Since TeamViewer is the last software installed by ninite,
     # this section wait till ninite is done to move the shortcut on the desktop
     Write-Host "Cleaning Desktop..."
     do{
         Start-Sleep -s 10
-        if(Get-ItemProperty "C:\Program Files\TeamViewer\TeamViewer.exe" -erroraction 'silentlycontinue')
+        if(Get-ItemProperty "C:\Users\Public\Desktop\TeamViewer.lnk" -erroraction 'silentlycontinue')
         {
             #Clean Desktop
             ## This section create a folder name "Programme" on the desktop
             ## Every shortcut install by the script will automatically be move in this new folder
-            $DesktopPath = [Environment]::GetFolderPath("Desktop")
             mkdir $DesktopPath\Programmes
             Get-Item -Path "C:\Users\Public\Desktop\*.lnk" | Move-Item -Destination $DesktopPath"\Programmes"
 
@@ -338,7 +339,7 @@ function CleanDesktop {
         }
         
     }
-    while (!(Get-ItemProperty "C:\Program Files\TeamViewer\TeamViewer.exe" -erroraction 'silentlycontinue'))
+    while (!(Get-ItemProperty $DesktopPath"\Programmes\TeamViewer.lnk" -erroraction 'silentlycontinue'))
 
 }
 # ------------------------------------------------------------------------------------------------------------------ #
@@ -350,7 +351,7 @@ Function EndOfScript
 
     if(isWindows11)
     {
-        $window.popup("Every Thing Should Be Install As It Should.",0, "Windows 11 Install")
+        $window.popup("Every Thing Should Be Install.",0, "Windows 11 Install")
     }elseif (!isWindows11)
     {
         if($installationType -eq 1)
