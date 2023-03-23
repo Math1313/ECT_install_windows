@@ -1,6 +1,42 @@
 #Function to install Winget
 ##Winget is use to install other program directly from the Microsoft Store like Adobe Reader or Lenovo Commercial Vantage
 
+## Ask the user the type of installation he wants
+## Type 1 is ECT Technologie Installation
+## Type 2 is SXP Installation
+## Type 3 will end the script
+Function ChooseInstallationType
+{
+    do{
+        $continu = $false
+        Write-Host "Choisir un type d'installation:"
+        Write-Host "1 - ECT Technologie"
+        Write-Host "2 - SonXPlus"
+        Write-Host "3 - Annuler"
+        
+        $global:installationType = Read-Host
+        
+        if($installationType -like "1")
+        {
+            Write-Host "ECT Technologie"
+            $continu = $true
+        }elseif($installationType -like "2")
+        {
+            Write-Host "SonXPlus"
+            $continu = $true
+        }elseif($installationType -like "3")
+        {
+            exit
+        }else {
+            Clear-Host
+            Write-Host "Entrez une valeur valide."
+        }
+    }
+    while($continu -eq $false)
+}
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
+
 Function isWindows11{
     $winver = (Get-ComputerInfo).OsName
 
@@ -11,6 +47,8 @@ Function isWindows11{
         return 0
     }
 }
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
 
 Function Install-WinGet {
     #Install the latest package from GitHub
@@ -75,6 +113,8 @@ Function Install-WinGet {
     }
     Write-Verbose "[$((Get-Date).TimeofDay)] Ending $($myinvocation.mycommand)"
 }
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
 
 Function SetDesktopIcons {
     #------------------------------------------------------------------------------------#
@@ -101,6 +141,8 @@ Function SetDesktopIcons {
         }
     }
 }
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
 
 function SetTaskbarSettings {
     #Taskbar
@@ -122,6 +164,8 @@ function SetTaskbarSettings {
     New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarMn" -Value 0 -Force
     
 }
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
 
 function SetAlimentationSettings {
     #Alimentation (Delay in minute, 0 = never)
@@ -164,6 +208,8 @@ function SetAlimentationSettings {
     ## On battery
     powercfg /setDCvalueIndex scheme_current sub_buttons lidAction 2
 }
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
 
 function InstallPrograms {
     # Program
@@ -197,8 +243,17 @@ function InstallPrograms {
     ## To work, you need to replace to name of your ninite by "ninite.exe" or rename the .exe file below
     ## The ninite file also need to be place in the same folder than the script
     ## If you prefer you can change the path of the file below
-    .\extension\ninite.exe
+    ## The if statement is use to determine wich ninite file to use, since SonXPlus and ECT don't use the same
+    if($installationType -eq 1) ## 1 is ECT Technologie Type
+    {
+        .\extension\niniteECT.exe
+    }elseif ($installationType -eq 2) ## 2 is SonXPlus Type
+    {
+        .\extension\niniteSXP.exe
+    }
 }
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
 
 function SetDefaultApps {
     # Wait till Chrome is installed to set him as default browser
@@ -233,7 +288,8 @@ function SetDefaultApps {
     }
     
 }
-
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
 function CleanDesktop {
     # Since TeamViewer is the last software installed by ninite,
     # this section wait till ninite is done to move the shortcut on the desktop
@@ -263,7 +319,24 @@ function CleanDesktop {
     while (!(Get-ItemProperty "C:\Program Files\TeamViewer\TeamViewer.exe" -erroraction 'silentlycontinue'))
 
 }
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
 
+Function EndOfScript
+{
+    $window = New-Object -ComObject Wscript.Shell
+
+    if(isWindows11)
+    {
+        $window.popup("Every Thing Should Be Install As It Should.",0, "Windows 11 Install")
+    }elseif (!isWindows11)
+    {
+        $window.popup("Please Install Adobe And Lenovo Manually If Needed !",0, "Windows 10 Install")
+    }
+}
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
 
 Clear-Host
 " __      __.__            .___                      _____             "
@@ -276,6 +349,11 @@ Clear-Host
 " |    __)_ |  | _/ __ \_/ ___\   __\_  __ \/  _ \_/ ___\/  _ \ /     \    |    |_/ __ \_/ ___\|  |  \ "
 " |        \|  |_\  ___/\  \___|  |  |  | \(  <_> )  \__(  <_> )  Y Y  \   |    |\  ___/\  \___|   Y  \"
 "/_________/|____/\_____>\_____>__|  |__|   \____/ \_____>____/|__|_|__/   |____| \_____>\_____>___|__/"
+
+
+# This section only invoke function define in the upper section
+
+ChooseInstallationType
 
 if(isWindows11)
 {
@@ -293,6 +371,8 @@ InstallPrograms
 SetDefaultApps
 
 CleanDesktop
+
+EndOfScript
 
 # Relauch windows explorer to apply changes
 Stop-Process -Name explorer
