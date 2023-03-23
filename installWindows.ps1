@@ -2,16 +2,17 @@
 Function PrintECT
 {
     Clear-Host
-    Write-Host " __      __.__            .___                      _____             "
-    Write-Host "/  \    /  \__| ____    __| _/______  _  ________ _/ ____\___________ "
-    Write-Host "\   \/\/   /  |/    \  / __ |/  _ \ \/ \/ /  ___/ \   __\/  _ \_  __ \"
-    Write-Host " \        /|  |   |  \/ /_/ (  <_> )     /\___ \   |  | (  <_> )  | \/"
-    Write-Host "  \__/\__/ |__|___|  /\____ |\____/ \/\_//______>  |__|  \____/|__|   "
-    Write-Host "___________.__                 __                                       ___________           .__     "
-    Write-Host "\_   _____/|  |   ____   _____/  |________  ____   ____  ____   _____   \__    ___/___   ____ |  |__  "
-    Write-Host " |    __)_ |  | _/ __ \_/ ___\   __\_  __ \/  _ \_/ ___\/  _ \ /     \    |    |_/ __ \_/ ___\|  |  \ "
-    Write-Host " |        \|  |_\  ___/\  \___|  |  |  | \(  <_> )  \__(  <_> )  Y Y  \   |    |\  ___/\  \___|   Y  \"
-    Write-Host "/_________/|____/\_____>\_____>__|  |__|   \____/ \_____>____/|__|_|__/   |____| \_____>\_____>___|__/"
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " __      __.__            .___                      _____                                             "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "/  \    /  \__| ____    __| _/______  _  ________ _/ ____\___________                                 "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "\   \/\/   /  |/    \  / __ |/  _ \ \/ \/ /  ___/ \   __\/  _ \_  __ \                                "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " \        /|  |   |  \/ /_/ (  <_> )     /\___ \   |  | (  <_> )  | \/                                "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "  \__/\__/ |__|___|  /\____ |\____/ \/\_//______>  |__|  \____/|__|                                   "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "___________.__                 __                                       ___________           .__     "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "\_   _____/|  |   ____   _____/  |________  ____   ____  ____   _____   \__    ___/___   ____ |  |__  "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " |    __)_ |  | _/ __ \_/ ___\   __\_  __ \/  _ \_/ ___\/  _ \ /     \    |    |_/ __ \_/ ___\|  |  \ "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " |        \|  |_\  ___/\  \___|  |  |  | \(  <_> )  \__(  <_> )  Y Y  \   |    |\  ___/\  \___|   Y  \"
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "/_________/|____/\_____>\_____>__|  |__|   \____/ \_____>____/|__|_|__/   |____| \_____>\_____>___|__/"
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "                                                                                                      "
 }
 
 ## Ask the user the type of installation he wants
@@ -232,8 +233,9 @@ function InstallPrograms {
     if(isWindows11)
     {
         winget install --id "Adobe.Acrobat.Reader.32-bit" --accept-package-agreements --accept-source-agreements
+        PrintECT
     }else{
-        Write-Host "Please Install Lenovo Commercial Vantage Manually"
+        Write-Host "Please Install Adobe Acrobat Reader Manually"
     }
 
     ##Manufacturer
@@ -243,12 +245,13 @@ function InstallPrograms {
     ##If manufacturer is Dell, install SupportAssist
     if($make -eq "Dell Inc.")
     {
-        ..\extension\SupportAssistInstaller.exe
+        .\extension\SupportAssistInstaller.exe
     }elseif($make -eq "LENOVO") ##If manufacturer is LENOVO, download Lenovo Commercial Vantage
     {
         if(isWindows11)
         {
             winget install "Lenovo Commercial Vantage" --disable-interactivity --accept-package-agreements
+            PrintECT
         }else{
             Write-Host "Please Install Lenovo Commercial Vantage Manually"
         }
@@ -261,10 +264,16 @@ function InstallPrograms {
     ## The if statement is use to determine wich ninite file to use, since SonXPlus and ECT don't use the same
     if($installationType -eq 1) ## 1 is ECT Technologie Type
     {
-        ..\extension\niniteECT.exe
+        .\extension\niniteECT.exe
     }elseif ($installationType -eq 2) ## 2 is SonXPlus Type
     {
-        ..\extension\niniteSXP.exe
+        .\extension\niniteSXP.exe
+        if(isWindows11)
+        {
+            winget install --id "9WZDNCRF0083" --accept-package-agreements --accept-source-agreements
+        }else{
+            Write-Host "Please Install Lenovo Commercial Vantage Manually"
+        }
     }
 }
 # ------------------------------------------------------------------------------------------------------------------ #
@@ -277,14 +286,15 @@ function SetDefaultApps {
         Start-Sleep -s 10
         if(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe' -erroraction 'silentlycontinue')
         {
-            ..\extension\SetUserFTA\SetUserFTA.exe .htm ChromeHTML
-            ..\extension\SetUserFTA\SetUserFTA.exe .html ChromeHTML
-            ..\extension\SetUserFTA\SetUserFTA.exe http ChromeHTML
-            ..\extension\SetUserFTA\SetUserFTA.exe https ChromeHTML
-            ..\extension\SetUserFTA\SetUserFTA.exe .webp ChromeHTML
+            .\extension\SetUserFTA\SetUserFTA.exe .htm ChromeHTML
+            .\extension\SetUserFTA\SetUserFTA.exe .html ChromeHTML
+            .\extension\SetUserFTA\SetUserFTA.exe http ChromeHTML
+            .\extension\SetUserFTA\SetUserFTA.exe https ChromeHTML
+            .\extension\SetUserFTA\SetUserFTA.exe .webp ChromeHTML
             "Google Chrome Is Installed And Set As Default !"
         } else
         {
+            PrintECT
             "Google Chrome Is Not Installed Yet..."
         }
         
@@ -294,7 +304,7 @@ function SetDefaultApps {
     # Check if Adobe Acrobat Reader is installed
     if(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\AcroRd32.exe' -erroraction 'silentlycontinue')
     {
-        ..\extension\SetUserFTA\SetUserFTA.exe .pdf AcroExch.Document.DC
+        .\extension\SetUserFTA\SetUserFTA.exe .pdf AcroExch.Document.DC
         "Adobe Acrobate Reader Is Installed And Set As Default !"
     } else
     {
@@ -318,15 +328,12 @@ function CleanDesktop {
             ## Every shortcut install by the script will automatically be move in this new folder
             $DesktopPath = [Environment]::GetFolderPath("Desktop")
             mkdir $DesktopPath\Programmes
+            Get-Item -Path "C:\Users\Public\Desktop\*.lnk" | Move-Item -Destination $DesktopPath"\Programmes"
 
-            Move-Item -Path "C:\Users\Public\Desktop\Google Chrome.lnk" -Destination $DesktopPath"\Programmes\Google Chrome.lnk"
-            Move-Item -Path "C:\Users\Public\Desktop\Microsoft Edge.lnk" -Destination $DesktopPath"\Programmes\Microsoft Edge.lnk" 
-            Move-Item -Path "C:\Users\Public\Desktop\Acrobat Reader.lnk" -Destination $DesktopPath"\Programmes\Acrobat Reader.lnk"
-            Move-Item -Path "C:\Users\Public\Desktop\TeamViewer.lnk" -Destination $DesktopPath"\Programmes\TeamViewer.lnk"
-            Move-Item -Path "C:\Users\Public\Desktop\VLC media player.lnk" -Destination $DesktopPath"\Programmes\VLC media player.lnk"
             Write-Host "Desktop Is Now Clean !"
         } else
         {
+            PrintECT
             Write-Host "Waiting For Ninite To Be Done... ('CTRL + C' To Stop)"
         }
         
@@ -346,7 +353,13 @@ Function EndOfScript
         $window.popup("Every Thing Should Be Install As It Should.",0, "Windows 11 Install")
     }elseif (!isWindows11)
     {
-        $window.popup("Please Install Adobe And Lenovo Manually If Needed !",0, "Windows 10 Install")
+        if($installationType -eq 1)
+        {
+            $window.popup("Please Install Adobe And Lenovo Manually If Needed !",0, "Windows 10 Install")
+        } elseif($installationType -eq 2)
+        {
+            $window.popup("Please Install Adobe, Messenger and Lenovo Manually If Needed !",0, "Windows 10 Install")
+        }
     }
 }
 # ------------------------------------------------------------------------------------------------------------------ #
