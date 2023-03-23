@@ -1,5 +1,18 @@
-#Function to install Winget
-##Winget is use to install other program directly from the Microsoft Store like Adobe Reader or Lenovo Commercial Vantage
+
+Function PrintECT
+{
+    Clear-Host
+    Write-Host " __      __.__            .___                      _____             "
+    Write-Host "/  \    /  \__| ____    __| _/______  _  ________ _/ ____\___________ "
+    Write-Host "\   \/\/   /  |/    \  / __ |/  _ \ \/ \/ /  ___/ \   __\/  _ \_  __ \"
+    Write-Host " \        /|  |   |  \/ /_/ (  <_> )     /\___ \   |  | (  <_> )  | \/"
+    Write-Host "  \__/\__/ |__|___|  /\____ |\____/ \/\_//______>  |__|  \____/|__|   "
+    Write-Host "___________.__                 __                                       ___________           .__     "
+    Write-Host "\_   _____/|  |   ____   _____/  |________  ____   ____  ____   _____   \__    ___/___   ____ |  |__  "
+    Write-Host " |    __)_ |  | _/ __ \_/ ___\   __\_  __ \/  _ \_/ ___\/  _ \ /     \    |    |_/ __ \_/ ___\|  |  \ "
+    Write-Host " |        \|  |_\  ___/\  \___|  |  |  | \(  <_> )  \__(  <_> )  Y Y  \   |    |\  ___/\  \___|   Y  \"
+    Write-Host "/_________/|____/\_____>\_____>__|  |__|   \____/ \_____>____/|__|_|__/   |____| \_____>\_____>___|__/"
+}
 
 ## Ask the user the type of installation he wants
 ## Type 1 is ECT Technologie Installation
@@ -28,7 +41,7 @@ Function ChooseInstallationType
         {
             exit
         }else {
-            Clear-Host
+            PrintECT
             Write-Host "Entrez une valeur valide."
         }
     }
@@ -49,6 +62,8 @@ Function isWindows11{
 }
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
+#Function to install Winget
+##Winget is use to install other program directly from the Microsoft Store like Adobe Reader or Lenovo Commercial Vantage
 
 Function Install-WinGet {
     #Install the latest package from GitHub
@@ -228,7 +243,7 @@ function InstallPrograms {
     ##If manufacturer is Dell, install SupportAssist
     if($make -eq "Dell Inc.")
     {
-        .\extension\SupportAssistInstaller.exe
+        ..\extension\SupportAssistInstaller.exe
     }elseif($make -eq "LENOVO") ##If manufacturer is LENOVO, download Lenovo Commercial Vantage
     {
         if(isWindows11)
@@ -246,10 +261,10 @@ function InstallPrograms {
     ## The if statement is use to determine wich ninite file to use, since SonXPlus and ECT don't use the same
     if($installationType -eq 1) ## 1 is ECT Technologie Type
     {
-        .\extension\niniteECT.exe
+        ..\extension\niniteECT.exe
     }elseif ($installationType -eq 2) ## 2 is SonXPlus Type
     {
-        .\extension\niniteSXP.exe
+        ..\extension\niniteSXP.exe
     }
 }
 # ------------------------------------------------------------------------------------------------------------------ #
@@ -262,11 +277,11 @@ function SetDefaultApps {
         Start-Sleep -s 10
         if(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe' -erroraction 'silentlycontinue')
         {
-            .\extension\SetUserFTA\SetUserFTA.exe .htm ChromeHTML
-            .\extension\SetUserFTA\SetUserFTA.exe .html ChromeHTML
-            .\extension\SetUserFTA\SetUserFTA.exe http ChromeHTML
-            .\extension\SetUserFTA\SetUserFTA.exe https ChromeHTML
-            .\extension\SetUserFTA\SetUserFTA.exe .webp ChromeHTML
+            ..\extension\SetUserFTA\SetUserFTA.exe .htm ChromeHTML
+            ..\extension\SetUserFTA\SetUserFTA.exe .html ChromeHTML
+            ..\extension\SetUserFTA\SetUserFTA.exe http ChromeHTML
+            ..\extension\SetUserFTA\SetUserFTA.exe https ChromeHTML
+            ..\extension\SetUserFTA\SetUserFTA.exe .webp ChromeHTML
             "Google Chrome Is Installed And Set As Default !"
         } else
         {
@@ -279,7 +294,7 @@ function SetDefaultApps {
     # Check if Adobe Acrobat Reader is installed
     if(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\AcroRd32.exe' -erroraction 'silentlycontinue')
     {
-        .\extension\SetUserFTA\SetUserFTA.exe .pdf AcroExch.Document.DC
+        ..\extension\SetUserFTA\SetUserFTA.exe .pdf AcroExch.Document.DC
         "Adobe Acrobate Reader Is Installed And Set As Default !"
     } else
     {
@@ -337,21 +352,8 @@ Function EndOfScript
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
-
-Clear-Host
-" __      __.__            .___                      _____             "
-"/  \    /  \__| ____    __| _/______  _  ________ _/ ____\___________ "
-"\   \/\/   /  |/    \  / __ |/  _ \ \/ \/ /  ___/ \   __\/  _ \_  __ \"
-" \        /|  |   |  \/ /_/ (  <_> )     /\___ \   |  | (  <_> )  | \/"
-"  \__/\__/ |__|___|  /\____ |\____/ \/\_//______>  |__|  \____/|__|   "
-"___________.__                 __                                       ___________           .__     "
-"\_   _____/|  |   ____   _____/  |________  ____   ____  ____   _____   \__    ___/___   ____ |  |__  "
-" |    __)_ |  | _/ __ \_/ ___\   __\_  __ \/  _ \_/ ___\/  _ \ /     \    |    |_/ __ \_/ ___\|  |  \ "
-" |        \|  |_\  ___/\  \___|  |  |  | \(  <_> )  \__(  <_> )  Y Y  \   |    |\  ___/\  \___|   Y  \"
-"/_________/|____/\_____>\_____>__|  |__|   \____/ \_____>____/|__|_|__/   |____| \_____>\_____>___|__/"
-
-
 # This section only invoke function define in the upper section
+PrintECT
 
 ChooseInstallationType
 
