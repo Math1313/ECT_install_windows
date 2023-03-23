@@ -1,49 +1,17 @@
-## Ask the user the type of installation he wants
-## Type 1 is ECT Technologie Installation
-## Type 2 is SXP Installation
-## Type 3 will end the script
-Function ChooseInstallationType
+
+Function PrintECT
 {
-    do{
-        $continu = $false
-        Write-Host "Choisir un type d'installation:"
-        Write-Host "1 - ECT Technologie"
-        Write-Host "2 - SonXPlus"
-        Write-Host "3 - Annuler"
-        
-        $global:installationType = Read-Host
-        
-        if($installationType -like "1")
-        {
-            Write-Host "ECT Technologie"
-            $continu = $true
-        }elseif($installationType -like "2")
-        {
-            Write-Host "SonXPlus"
-            $continu = $true
-        }elseif($installationType -like "3")
-        {
-            exit
-        }else {
-            Clear-Host
-            Write-Host "Entrez une valeur valide."
-        }
-    }
-    while($continu -eq $false)
+    Clear-Host
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " __      __.__            .___                      _____                                             "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "/  \    /  \__| ____    __| _/______  _  ________ _/ ____\___________                                 "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "\   \/\/   /  |/    \  / __ |/  _ \ \/ \/ /  ___/ \   __\/  _ \_  __ \                                "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " \        /|  |   |  \/ /_/ (  <_> )     /\___ \   |  | (  <_> )  | \/                                "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "  \__/\__/ |__|___|  /\____ |\____/ \/\_//______>  |__|  \____/|__|                                   "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "___________.__                 __                                       ___________           .__     "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "\_   _____/|  |   ____   _____/  |________  ____   ____  ____   _____   \__    ___/___   ____ |  |__  "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " |    __)_ |  | _/ __ \_/ ___\   __\_  __ \/  _ \_/ ___\/  _ \ /     \    |    |_/ __ \_/ ___\|  |  \ "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " |        \|  |_\  ___/\  \___|  |  |  | \(  <_> )  \__(  <_> )  Y Y  \   |    |\  ___/\  \___|   Y  \"
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "/_________/|____/\_____>\_____>__|  |__|   \____/ \_____>____/|__|_|__/   |____| \_____>\_____>___|__/"
 }
 
-Function PrintInstallationType
-{
-    if($installationType -eq 1)
-    {
-        Write-Host "ECT Technologie - $installationType"
-    }elseif($installationType -eq 2)
-    {
-        Write-Host "SXP - $installationType"
-    }
-}
-
-
-ChooseInstallationType
-
-PrintInstallationType
+PrintECT

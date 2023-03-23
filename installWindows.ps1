@@ -1,5 +1,19 @@
-#Function to install Winget
-##Winget is use to install other program directly from the Microsoft Store like Adobe Reader or Lenovo Commercial Vantage
+
+Function PrintECT
+{
+    Clear-Host
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " __      __.__            .___                      _____                                             "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "/  \    /  \__| ____    __| _/______  _  ________ _/ ____\___________                                 "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "\   \/\/   /  |/    \  / __ |/  _ \ \/ \/ /  ___/ \   __\/  _ \_  __ \                                "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " \        /|  |   |  \/ /_/ (  <_> )     /\___ \   |  | (  <_> )  | \/                                "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "  \__/\__/ |__|___|  /\____ |\____/ \/\_//______>  |__|  \____/|__|                                   "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "___________.__                 __                                       ___________           .__     "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "\_   _____/|  |   ____   _____/  |________  ____   ____  ____   _____   \__    ___/___   ____ |  |__  "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " |    __)_ |  | _/ __ \_/ ___\   __\_  __ \/  _ \_/ ___\/  _ \ /     \    |    |_/ __ \_/ ___\|  |  \ "
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " |        \|  |_\  ___/\  \___|  |  |  | \(  <_> )  \__(  <_> )  Y Y  \   |    |\  ___/\  \___|   Y  \"
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "/_________/|____/\_____>\_____>__|  |__|   \____/ \_____>____/|__|_|__/   |____| \_____>\_____>___|__/"
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "                                                                                                      "
+}
 
 ## Ask the user the type of installation he wants
 ## Type 1 is ECT Technologie Installation
@@ -28,7 +42,7 @@ Function ChooseInstallationType
         {
             exit
         }else {
-            Clear-Host
+            PrintECT
             Write-Host "Entrez une valeur valide."
         }
     }
@@ -49,6 +63,8 @@ Function isWindows11{
 }
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
+#Function to install Winget
+##Winget is use to install other program directly from the Microsoft Store like Adobe Reader or Lenovo Commercial Vantage
 
 Function Install-WinGet {
     #Install the latest package from GitHub
@@ -217,8 +233,9 @@ function InstallPrograms {
     if(isWindows11)
     {
         winget install --id "Adobe.Acrobat.Reader.32-bit" --accept-package-agreements --accept-source-agreements
+        PrintECT
     }else{
-        Write-Host "Please Install Lenovo Commercial Vantage Manually"
+        Write-Host "Please Install Adobe Acrobat Reader Manually"
     }
 
     ##Manufacturer
@@ -234,6 +251,7 @@ function InstallPrograms {
         if(isWindows11)
         {
             winget install "Lenovo Commercial Vantage" --disable-interactivity --accept-package-agreements
+            PrintECT
         }else{
             Write-Host "Please Install Lenovo Commercial Vantage Manually"
         }
@@ -250,6 +268,12 @@ function InstallPrograms {
     }elseif ($installationType -eq 2) ## 2 is SonXPlus Type
     {
         .\extension\niniteSXP.exe
+        if(isWindows11)
+        {
+            winget install --id "9WZDNCRF0083" --accept-package-agreements --accept-source-agreements
+        }else{
+            Write-Host "Please Install Lenovo Commercial Vantage Manually"
+        }
     }
 }
 # ------------------------------------------------------------------------------------------------------------------ #
@@ -270,6 +294,7 @@ function SetDefaultApps {
             "Google Chrome Is Installed And Set As Default !"
         } else
         {
+            PrintECT
             "Google Chrome Is Not Installed Yet..."
         }
         
@@ -303,15 +328,12 @@ function CleanDesktop {
             ## Every shortcut install by the script will automatically be move in this new folder
             $DesktopPath = [Environment]::GetFolderPath("Desktop")
             mkdir $DesktopPath\Programmes
+            Get-Item -Path "C:\Users\Public\Desktop\*.lnk" | Move-Item -Destination $DesktopPath"\Programmes"
 
-            Move-Item -Path "C:\Users\Public\Desktop\Google Chrome.lnk" -Destination $DesktopPath"\Programmes\Google Chrome.lnk"
-            Move-Item -Path "C:\Users\Public\Desktop\Microsoft Edge.lnk" -Destination $DesktopPath"\Programmes\Microsoft Edge.lnk" 
-            Move-Item -Path "C:\Users\Public\Desktop\Acrobat Reader.lnk" -Destination $DesktopPath"\Programmes\Acrobat Reader.lnk"
-            Move-Item -Path "C:\Users\Public\Desktop\TeamViewer.lnk" -Destination $DesktopPath"\Programmes\TeamViewer.lnk"
-            Move-Item -Path "C:\Users\Public\Desktop\VLC media player.lnk" -Destination $DesktopPath"\Programmes\VLC media player.lnk"
             Write-Host "Desktop Is Now Clean !"
         } else
         {
+            PrintECT
             Write-Host "Waiting For Ninite To Be Done... ('CTRL + C' To Stop)"
         }
         
@@ -331,27 +353,20 @@ Function EndOfScript
         $window.popup("Every Thing Should Be Install As It Should.",0, "Windows 11 Install")
     }elseif (!isWindows11)
     {
-        $window.popup("Please Install Adobe And Lenovo Manually If Needed !",0, "Windows 10 Install")
+        if($installationType -eq 1)
+        {
+            $window.popup("Please Install Adobe And Lenovo Manually If Needed !",0, "Windows 10 Install")
+        } elseif($installationType -eq 2)
+        {
+            $window.popup("Please Install Adobe, Messenger and Lenovo Manually If Needed !",0, "Windows 10 Install")
+        }
     }
 }
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
-
-Clear-Host
-" __      __.__            .___                      _____             "
-"/  \    /  \__| ____    __| _/______  _  ________ _/ ____\___________ "
-"\   \/\/   /  |/    \  / __ |/  _ \ \/ \/ /  ___/ \   __\/  _ \_  __ \"
-" \        /|  |   |  \/ /_/ (  <_> )     /\___ \   |  | (  <_> )  | \/"
-"  \__/\__/ |__|___|  /\____ |\____/ \/\_//______>  |__|  \____/|__|   "
-"___________.__                 __                                       ___________           .__     "
-"\_   _____/|  |   ____   _____/  |________  ____   ____  ____   _____   \__    ___/___   ____ |  |__  "
-" |    __)_ |  | _/ __ \_/ ___\   __\_  __ \/  _ \_/ ___\/  _ \ /     \    |    |_/ __ \_/ ___\|  |  \ "
-" |        \|  |_\  ___/\  \___|  |  |  | \(  <_> )  \__(  <_> )  Y Y  \   |    |\  ___/\  \___|   Y  \"
-"/_________/|____/\_____>\_____>__|  |__|   \____/ \_____>____/|__|_|__/   |____| \_____>\_____>___|__/"
-
-
 # This section only invoke function define in the upper section
+PrintECT
 
 ChooseInstallationType
 
