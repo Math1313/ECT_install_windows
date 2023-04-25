@@ -364,7 +364,7 @@ function SetDefaultPDFReader{
 # ------------------------------------------------------------------------------------------------------------------ #
 function CleanDesktop {
 
-    $DesktopPath = [Environment]::GetFolderPath("Desktop")
+    $DesktopPath = "C:\Users\Public\Desktop"
     # Comme TeamViewer est le dernier logiciel installé par ninite,
     # cette section va attendre que ce logiciel soit installé avant de déplacer les applications dans un dossier programme
     Write-Host "Cleaning Desktop..."
