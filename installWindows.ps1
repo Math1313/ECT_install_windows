@@ -13,11 +13,11 @@ Function PrintECT
     Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " |        \|  |_\  ___/\  \___|  |  |  | \(  <_> )  \__(  <_> )  Y Y  \   |    |\  ___/\  \___|   Y  \"
     Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "/_________/|____/\_____>\_____>__|  |__|   \____/ \_____>____/|__|_|__/   |____| \_____>\_____>___|__/"
     Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "                                                                                                      "
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red' '___            __  __          _     _      _   ____  _   ____                                             '
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red' '| _ )  _  _    |  \/  |  __ _  | |_  | |_   / | |__ / / | |__ /                                            '
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red' '| _ \ | || |   | |\/| | / _` | |  _| | ` \  | |  |_ \ | |  |_ \                                            '
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red' '|___/  \_, |   |_|  |_| \__,_|  \__| |_||_| |_| |___/ |_| |___/                                            '
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red' '       |__/                                                                                                '
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red'      '___            __  __          _     _      _   ____  _   ____                                        '
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red'      '| _ )  _  _    |  \/  |  __ _  | |_  | |_   / | |__ / / | |__ /                                       '
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red'      '| _ \ | || |   | |\/| | / _` | |  _| | ` \  | |  |_ \ | |  |_ \                                       '
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red'      '|___/  \_, |   |_|  |_| \__,_|  \__| |_||_| |_| |___/ |_| |___/                                       '
+    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red'      '       |__/                                                                                           '
 }
 
 ## Ask the user the type of installation he wants
