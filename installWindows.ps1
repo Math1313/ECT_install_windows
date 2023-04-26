@@ -134,6 +134,15 @@ Function Install-WinGet {
     }
     Write-Verbose "[$((Get-Date).TimeofDay)] Ending $($myinvocation.mycommand)"
 }
+
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
+Function WifiConnection {
+    # Pour avoir le bon fichier XML, exporter le profile du réseau que vous souhaitez connecter en utilisant "netsh wlan export profile folder="path""
+    # Ensuite, mettez le fichier XML dans le dossier "extension" et renommer le fichier utilisé dans les deux commandes suivantes
+    netsh wlan add profile filename=".\extension\Wi-Fi 4-ECT-Technicien.xml"
+    netsh wlan connect ssid="ECT-Technicien" name="ECT-Technicien"
+}
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
 
@@ -422,6 +431,8 @@ if(isWindows11)
 {
     Install-WinGet
 }
+
+WifiConnection
 
 SetDesktopIcons
 
