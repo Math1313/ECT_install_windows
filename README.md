@@ -4,7 +4,7 @@
 This script has been created for new Windows installation made by Electrocom Technologie
 ### Language
   <a href="#">
-    <img src="[svg/dev/tools/powershell.svg](https://github.com/anaselgarhy/cool-badges/blob/master/svg/dev/tools/powershell.svg)" alt="powershell" style="vertical-align:top; margin:6px 4px">
+    <img src="https://github.com/anaselgarhy/cool-badges/blob/master/svg/dev/tools/powershell.svg" alt="powershell" style="vertical-align:top; margin:6px 4px">
   </a> 
 
 
