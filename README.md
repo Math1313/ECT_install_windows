@@ -16,3 +16,20 @@ This script has been created for new Windows installation made by Electrocom Tec
 ### SetUserFTA
 https://kolbi.cz/blog/2017/10/25/setuserfta-userchoice-hash-defeated-set-file-type-associations-per-user/
 ## Software
+### ECT
+* Chrome
+* 7-Zip
+* VLC
+* TeamViewer 15
+* Adobe Acrobat Reader
+* SupportAssist or Lenovo Vantage Commercial
+### SXP
+* Chrome
+* 7-Zip
+* VLC
+* K-Lite Codecs
+* LibreOffice
+* TeamViewer 15
+* Adobe Acrobat Reader
+* Messenger
+* SupportAssist or Lenovo Vantage Commercial
