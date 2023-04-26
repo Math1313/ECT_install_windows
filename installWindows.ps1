@@ -154,7 +154,17 @@ Function DisableConfigBlueScreen {
 
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
-
+Function UninstallOneDrive {
+    try {
+    # Exécute la commande PowerShell
+    Invoke-Expression -Command "C:\Windows\SysWOW64\OneDriveSetup.exe /uninstall"
+    } catch {
+    # Si la commande a échoué, exécute une autre commande
+    Invoke-Expression -Command "C:\Windows\System32\OneDriveSetup.exe /uninstall"
+    }
+}
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
 Function SetDesktopIcons {
     #------------------------------------------------------------------------------------#
     # Desktop
@@ -437,6 +447,8 @@ PrintECT
 ChooseInstallationType
 
 WifiConnection
+
+UninstallOneDrive
 
 if(isWindows11)
 {
