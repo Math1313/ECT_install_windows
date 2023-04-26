@@ -143,6 +143,15 @@ Function WifiConnection {
     netsh wlan add profile filename=".\extension\Wi-Fi 4-ECT-Technicien.xml"
     netsh wlan connect ssid="ECT-Technicien" name="ECT-Technicien"
 }
+
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
+Function DisableConfigBlueScreen {
+    #0 = Off
+    #1 = On
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\UserProfileEngagement" -Name "ScoobeSystemSettingEnabled" -Value 0 -Force
+}
+
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
 
@@ -427,12 +436,14 @@ PrintECT
 
 ChooseInstallationType
 
+WifiConnection
+
 if(isWindows11)
 {
     Install-WinGet
 }
 
-WifiConnection
+DisableConfigBlueScreen
 
 SetDesktopIcons
 
