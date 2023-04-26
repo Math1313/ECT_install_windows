@@ -10,6 +10,7 @@ This script has been created for new Windows installation made by Electrocom Tec
 
   <a href="#">
     <img src="svg/dev/tools/visualstudio.svg" alt="visualstudio" style="vertical-align:top; margin:6px 4px">
-  </a> 
+  </a>
+
 ## Extension
 ## Software
