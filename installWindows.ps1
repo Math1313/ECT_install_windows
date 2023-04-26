@@ -420,6 +420,16 @@ function CleanDesktop {
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
 
+Function SetManufacturerInfo {
+    Copy-Item -Path ".\extension\ECT.bmp" -Destination "C:\Windows\"
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" -Name "Manufacturer" -Value "Electrocom Technologie" -Force
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" -Name "SupportPhone" -Value "418-679-5555, du lundi au vendredi de 8h30 - 17h30" -Force
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" -Name "SupportURL" -Value "https://electrocom.ca" -Force
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" -Name "Logo" -Value "C:\Windows\ECT.bmp" -Force
+}
+# ------------------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------------------ #
+
 Function EndOfScript
 {
     $window = New-Object -ComObject Wscript.Shell
@@ -470,6 +480,8 @@ SetDefaultWebBrowser
 SetDefaultPDFReader
 
 CleanDesktop
+
+SetManufacturerInfo
 
 EndOfScript
 
