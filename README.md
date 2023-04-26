@@ -9,7 +9,7 @@ This script has been created for new Windows installation made by Electrocom Tec
 
 
   <a href="#">
-    <img src="https://github.com/anaselgarhy/cool-badges/blob/master/svg/dev/tools/visualstudio_code.svg" alt="visualstudio" style="vertical-align:top; margin:6px 4px">
+    <img src="https://github.com/anaselgarhy/cool-badges/blob/master/svg/dev/tools/visualstudio_code.svg" alt="visualstudio_code" style="vertical-align:top; margin:6px 4px">
   </a>
 
 ## Extension
