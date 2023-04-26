@@ -13,6 +13,6 @@ This script has been created for new Windows installation made by Electrocom Tec
   </a>
 
 ## Extension
-### SetUserFTA:
+### SetUserFTA
 https://kolbi.cz/blog/2017/10/25/setuserfta-userchoice-hash-defeated-set-file-type-associations-per-user/
 ## Software
