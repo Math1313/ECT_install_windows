@@ -3,6 +3,13 @@
 ### Utility
 This script has been created for new Windows installation made by Electrocom Technologie
 ### Language
-[PowerShell]: https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&labelColor=ffffff&logoColor=5391FE&logo=powershell
+  <a href="#">
+    <img src="svg/dev/tools/powershell.svg" alt="powershell" style="vertical-align:top; margin:6px 4px">
+  </a> 
+
+
+  <a href="#">
+    <img src="svg/dev/tools/visualstudio.svg" alt="visualstudio" style="vertical-align:top; margin:6px 4px">
+  </a> 
 ## Extension
 ## Software
