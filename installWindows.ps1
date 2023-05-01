@@ -420,15 +420,14 @@ function CleanDesktop {
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
 
-Function SetManufacturerInfo {
-    Copy-Item -Path ".\extension\ECT.bmp" -Destination "C:\Windows\"
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" -Name "Manufacturer" -Value "Electrocom Technologie" -Force
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" -Name "SupportPhone" -Value "418-679-5555, du lundi au vendredi de 8h30 - 17h30" -Force
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" -Name "SupportURL" -Value "https://electrocom.ca" -Force
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" -Name "Logo" -Value "C:\Windows\ECT.bmp" -Force
+Function OptimizeAndRestorePoint{
+    Optimize-Volume -DriveLetter C
+    Enable-ComputerRestore -Drive "C:"
+    vssadmin resize shadowstorage /for=C: /on=C: /maxsize=10GB
+    New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Value 0 -PropertyType DWORD -Force
+    Checkpoint-Computer -Description "1"
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name "SystemRestorePointCreationFrequency" -Force
 }
-# ------------------------------------------------------------------------------------------------------------------ #
-# ------------------------------------------------------------------------------------------------------------------ #
 
 Function EndOfScript
 {
@@ -481,7 +480,7 @@ SetDefaultPDFReader
 
 CleanDesktop
 
-SetManufacturerInfo
+OptimizeAndRestorePoint
 
 EndOfScript
 
