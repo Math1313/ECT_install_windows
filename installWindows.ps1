@@ -443,15 +443,15 @@ Function EndOfScript
 
     if(isWindows11)
     {
-        $window.popup("Every Thing Should Be Install.",0, "Windows 11 Install")
+        $window.popup("Le script est terminé.",0, "Installation de Windows")
     }elseif (!isWindows11)
     {
         if($installationType -eq 1)
         {
-            $window.popup("Please Install Adobe And Lenovo Manually If Needed !",0, "Windows 10 Install")
+            $window.popup("Please Install Lenovo Manually If Needed !",0, "Windows 10 Install")
         } elseif($installationType -eq 2)
         {
-            $window.popup("Please Install Adobe, Messenger and Lenovo Manually If Needed !",0, "Windows 10 Install")
+            $window.popup("Please Install Messenger and Lenovo Manually If Needed !",0, "Windows 10 Install")
         }
     }
 }
