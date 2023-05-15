@@ -416,6 +416,12 @@ function CleanDesktop {
     }
     while (!(Get-ItemProperty $DesktopPath"\Programmes\TeamViewer.lnk" -erroraction 'silentlycontinue'))
 
+    #Changement du fond d'écran
+    
+    $wallpaperPath = "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Themes"
+    Remove-Item -Path "$wallpaperPath\TranscodedWallpaper"
+    Copy-Item -Path .\extension\wallpaper.jpg -Destination "$wallpaperPath\TranscodedWallpaper"
+
 }
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
