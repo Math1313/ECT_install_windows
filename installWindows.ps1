@@ -416,11 +416,31 @@ function CleanDesktop {
     }
     while (!(Get-ItemProperty $DesktopPath"\Programmes\TeamViewer.lnk" -erroraction 'silentlycontinue'))
 
-    #Changement du fond d'écran
-    
-    $wallpaperPath = "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Themes"
-    Remove-Item -Path "$wallpaperPath\TranscodedWallpaper"
-    Copy-Item -Path .\extension\wallpaper.jpg -Destination "$wallpaperPath\TranscodedWallpaper"
+    #Changement du fond d'écran si installation est SonXPlus
+    if($installationType -eq 2)
+    {
+        $wallpaperPath = ".\extension\wallpaper.jpg"
+        $imagesPath = "$env:USERPROFILE\Pictures"
+        Copy-Item -Path "$wallpaperPath" -Destination "$imagesPath\wallpaper.jpg"
+
+        # Définit le chemin d'accès de l'image comme fond d'écran
+        Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "WallPaper" -Value "$imagesPath\wallpaper.jpg"
+
+        # Rafraîchit le fond d'écran
+$signature = @"
+[DllImport("user32.dll", CharSet = CharSet.Auto)]
+public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+"@
+        $systemParametersInfo = Add-Type -MemberDefinition $signature -Name WallpaperUtils -Namespace "Wallpaper" -PassThru
+        $result = $systemParametersInfo::SystemParametersInfo(0x0014, 0, "$imagesPath\wallpaper.jpg", 0x01)
+
+        # Vérifie le résultat
+        if ($result -eq 0) {
+                Write-Host "Échec du changement du fond d'écran."
+            } else {
+                Write-Host "Le fond d'écran a été changé avec succès."
+            }
+        }
 
 }
 # ------------------------------------------------------------------------------------------------------------------ #
@@ -441,15 +461,15 @@ Function EndOfScript
 
     if(isWindows11)
     {
-        $window.popup("Every Thing Should Be Install.",0, "Windows 11 Install")
+        $window.popup("Le script est terminé.",0, "Installation de Windows")
     }elseif (!isWindows11)
     {
         if($installationType -eq 1)
         {
-            $window.popup("Please Install Adobe And Lenovo Manually If Needed !",0, "Windows 10 Install")
+            $window.popup("Please Install Lenovo Manually If Needed !",0, "Windows 10 Install")
         } elseif($installationType -eq 2)
         {
-            $window.popup("Please Install Adobe, Messenger and Lenovo Manually If Needed !",0, "Windows 10 Install")
+            $window.popup("Please Install Messenger and Lenovo Manually If Needed !",0, "Windows 10 Install")
         }
     }
 }
