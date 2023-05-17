@@ -53,6 +53,43 @@ Function ChooseInstallationType
     }
     while($continu -eq $false)
 }
+
+## Demande à l'utilisateur où il se trouve
+## 1 = Saint-Félicien
+## 2 = Alma
+## 3 = Arrêt du script
+Function ChooseInstallationPlace
+{
+    Clear-Host
+    PrintECT
+    do{
+        $continu = $false
+        Write-Host "Choisir un type d'installation:"
+        Write-Host "1 - Saint-Félicien"
+        Write-Host "2 - Alma"
+        Write-Host "3 - Annuler"
+        
+        $global:installationPlace = Read-Host
+        
+        if($installationPlace -like "1")
+        {
+            Write-Host "Saint-Félicien"
+            $continu = $true
+        }elseif($installationPlace -like "2")
+        {
+            Write-Host "Alma"
+            $continu = $true
+        }elseif($installationPlace -like "3")
+        {
+            exit
+        }else {
+            PrintECT
+            Write-Host "Entrez une valeur valide."
+        }
+    }
+    while($continu -eq $false)
+}
+
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
 #Fonction qui retourne la version de Windows
@@ -156,8 +193,15 @@ Function WifiConnection {
     $connectionStatus = ValidateConnection
     if ($connectionStatus -notcontains "Up")
     {
-        netsh wlan add profile filename=".\extension\Wi-Fi 4-ECT-Technicien.xml"
-        netsh wlan connect ssid="ECT-Technicien" name="ECT-Technicien"
+        if($installationPlace -eq 1)
+        {
+            netsh wlan add profile filename=".\extension\Wi-Fi 4-ECT-Technicien.xml"
+            netsh wlan connect ssid="ECT-Technicien" name="ECT-Technicien"
+        } elseif ($installationPlace -eq 2) 
+        {
+            netsh wlan add profile filename=".\extension\Wi-Fi SonXPlusTech.xml"
+            netsh wlan connect ssid="Atelier Informatique" name="Atelier Informatique"
+        }
     
         Write-Host "Tentative de connexion. Le script se poursuivra dans 10 secondes..."
         Start-Sleep -Seconds 10
@@ -517,6 +561,8 @@ Function EndOfScript
 PrintECT
 
 ChooseInstallationType
+
+ChooseInstallationPlace
 
 WifiConnection
 

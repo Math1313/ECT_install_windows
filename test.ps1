@@ -41,10 +41,4 @@
 #         $TeamsConfigData | ConvertTo-Json -Depth 100 | Out-File -Encoding UTF8 -FilePath $TeamsConfig -Force
 #     }
 
-foreach($adapter in Get-NetAdapter)
-{
-    if($adapter.Name -like "*Bluetooth*")
-    {
-        Write-Host $adapter.Name
-    }
-}
+[System.Windows.MessageBox]::Show("Are you a Windows user?", "Question", "YesNo", "Question")
