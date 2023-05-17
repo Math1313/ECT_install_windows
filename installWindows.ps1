@@ -140,8 +140,41 @@ Function Install-WinGet {
 Function WifiConnection {
     # Pour avoir le bon fichier XML, exporter le profile du réseau que vous souhaitez connecter en utilisant "netsh wlan export profile folder="path""
     # Ensuite, mettez le fichier XML dans le dossier "extension" et renommer le fichier utilisé dans les deux commandes suivantes
-    netsh wlan add profile filename=".\extension\Wi-Fi 4-ECT-Technicien.xml"
-    netsh wlan connect ssid="ECT-Technicien" name="ECT-Technicien"
+    function  ValidateConnection{
+        $connectionStatus = @()
+        foreach($adapter in Get-NetAdapter)
+        {
+            if($adapter.Name -notlike "*Bluetooth*")
+            {
+                $connectionStatus += $adapter.Status
+            }
+        }
+    
+        return $connectionStatus
+    }
+    
+    $connectionStatus = ValidateConnection
+    if ($connectionStatus -notcontains "Up")
+    {
+        netsh wlan add profile filename=".\extension\Wi-Fi 4-ECT-Technicien.xml"
+        netsh wlan connect ssid="ECT-Technicien" name="ECT-Technicien"
+    
+        Write-Host "Tentative de connexion. Le script se poursuivra dans 10 secondes..."
+        Start-Sleep -Seconds 10
+        $connectionStatus = ValidateConnection
+        if($connectionStatus -notcontains "Up")
+        {
+            $window = New-Object -ComObject Wscript.Shell
+            $window.popup("Le script va s'arrêter.",0, "Erreur de connexion")
+            exit
+        }
+        else {
+            "Au moins une connexion est OK, le script va continuer normalement."
+        }
+    }
+    else{
+        "Au moins une connexion est OK, le script va continuer normalement."
+    }
 }
 
 # ------------------------------------------------------------------------------------------------------------------ #
@@ -473,7 +506,7 @@ Function EndOfScript
             $window.popup("Please Install Lenovo Manually If Needed !",0, "Windows 10 Install")
         } elseif($installationType -eq 2)
         {
-            $window.popup("Please Install Messenger and Lenovo Manually If Needed !",0, "Windows 10 Install")
+            $window.popup("Please Install Lenovo Manually If Needed !",0, "Windows 10 Install")
         }
     }
 }
