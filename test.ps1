@@ -1,27 +1,43 @@
+$TeamsAutoRun = (Get-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -ea SilentlyContinue)."com.squirrel.Teams.Teams"
+if ($TeamsAutoRun)
+{
+    Remove-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name "com.squirrel.Teams.Teams"
+}
 
+# Teams Config Data
+$TeamsConfig = "$env:APPDATA\Microsoft\Teams\desktop-config.json"
+$global:TeamsConfigData = Get-Content $TeamsConfig -Raw -ea SilentlyContinue | ConvertFrom-Json
 
-#Remove-Item -Path "$wallpaperPath\TranscodedWallpaper"
-#Remove-Item -Path "$wallpaperPath\CachedFiles" -Recurse
-
-$wallpaperPath = ".\extension\wallpaper.jpg"
-$imagesPath = "$env:USERPROFILE\Pictures"
-Copy-Item -Path "$wallpaperPath" -Destination "$imagesPath\wallpaper.jpg"
-
-# Définit le chemin d'accès de l'image comme fond d'écran
-Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "WallPaper" -Value "$imagesPath\wallpaper.jpg"
-Write-Host "$imagesPath"
-
-# Rafraîchit le fond d'écran
-$signature = @"
-[DllImport("user32.dll", CharSet = CharSet.Auto)]
-public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
-"@
-$systemParametersInfo = Add-Type -MemberDefinition $signature -Name WallpaperUtils -Namespace "Wallpaper" -PassThru
-$result = $systemParametersInfo::SystemParametersInfo(0x0014, 0, "$imagesPath\wallpaper.jpg", 0x01)
-
-# Vérifie le résultat
-if ($result -eq 0) {
-    Write-Host "Échec du changement du fond d'écran."
-} else {
-    Write-Host "Le fond d'écran a été changé avec succès."
+# If Teams already doesn't have the autostart config, exit
+If ($TeamsConfigData)
+{
+    If ($TeamsConfigData.appPreferenceSettings.openAtLogin -eq $false)
+    {
+        # It's already configured to not startup
+        exit
+    }
+    else
+    {
+        # If Teams hasn't run, then it's not going to have the openAtLogin:true value
+        # Otherwise, replace openAtLogin:true with openAtLogin:false
+        If ($TeamsConfigData.appPreferenceSettings.openAtLogin -eq $true)
+        {
+            $TeamsConfigData.appPreferenceSettings.openAtLogin = $false
+        }
+        else
+        # If Teams has been intalled but hasn't been run yet, it won't have an autorun setting
+        {
+            $Values = ($TeamsConfigData.appPreferenceSettings | Get-Member -MemberType NoteProperty).Name
+            If ($Values -match "openAtLogin")
+            {
+                $TeamsConfigData.appPreferenceSettings.openAtLogin = $false
+            }
+            else
+            {
+                $TeamsConfigData.appPreferenceSettings | Add-Member -Name "openAtLogin" -Value $false -MemberType NoteProperty
+            }
+        }
+        # Save
+        $TeamsConfigData | ConvertTo-Json -Depth 100 | Out-File -Encoding UTF8 -FilePath $TeamsConfig -Force
+    }
 }
