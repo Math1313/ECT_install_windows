@@ -439,25 +439,13 @@ function SetDefaultPDFReader{
         Start-Sleep -s 10
         if(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\AcroRd32.exe' -erroraction 'silentlycontinue')
         {
-            if(isWindows11)
-            {
-                .\extension\SetUserFTA\SetUserFTA.exe .pdf AcroExch.Document.DC
-            }else
-            {
-                .\extension\SetUserFTA\SetUserFTA.exe .pdf Acrobat.Document.DC
-            }
+            .\extension\SetUserFTA\SetUserFTA.exe .pdf Acrobat.Document.DC
             "Adobe Acrobate Reader Is Installed And Set As Default !"
             break
         }
         elseif(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\Acrobat.exe' -erroraction 'silentlycontinue')
         {
-            if(isWindows11)
-            {
-                .\extension\SetUserFTA\SetUserFTA.exe .pdf AcroExch.Document.DC
-            }else
-            {
-                .\extension\SetUserFTA\SetUserFTA.exe .pdf Acrobat.Document.DC
-            }
+            .\extension\SetUserFTA\SetUserFTA.exe .pdf AcroExch.Document.DC
             "Adobe Acrobate Reader Is Installed And Set As Default !"
             break
         }
@@ -468,6 +456,10 @@ function SetDefaultPDFReader{
         }
     }
     while(!(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\AcroRd32.exe' -ErrorAction 'SilentlyContinue') -or !(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\Acrobat.exe' -ErrorAction 'SilentlyContinue'))
+}
+
+Function SetOtherExtension{
+    .\extension\SetUserFTA\SetUserFTA.exe .\extension\SetUserFTA\SetUserFTAconfig.txt
 }
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
@@ -586,6 +578,8 @@ InstallPrograms
 SetDefaultWebBrowser
 
 SetDefaultPDFReader
+
+SetOtherExtension
 
 CleanDesktop
 
