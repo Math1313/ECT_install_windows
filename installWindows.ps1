@@ -309,12 +309,12 @@ function InstallPrograms {
     }elseif ($installationType -eq 2) ## Type 2 est pour Son X Plus
     {
         .\extension\niniteSXP.exe
-        if(isWindows11)
-        {
-            winget install --id "9WZDNCRF0083" --accept-package-agreements --accept-source-agreements
-        }else{
-            Write-Host "Please Install Messenger Manually"
-        }
+        # if(isWindows11)
+        # {
+        #     winget install --id "9WZDNCRF0083" --accept-package-agreements --accept-source-agreements
+        # }else{
+        #     Write-Host "Please Install Messenger Manually"
+        # }
     }
 }
 # ------------------------------------------------------------------------------------------------------------------ #
