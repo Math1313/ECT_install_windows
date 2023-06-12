@@ -209,11 +209,11 @@ Function WifiConnection {
         if($connectionStatus -notcontains "Up")
         {
             $window = New-Object -ComObject Wscript.Shell
-            $window.popup("Le script va s'arrêter.",0, "Erreur de connexion")
+            $window.popup("Le script va s'arrêter, car il n'y a aucune connexion valide.",0, "Erreur de connexion")
             exit
         }
         else {
-            "Au moins une connexion est OK, le script va continuer normalement."
+            Write-Host "Au moins une connexion est OK, le script va continuer normalement."
         }
     }
     else{
@@ -471,23 +471,26 @@ function CleanDesktop {
     Write-Host "Cleaning Desktop..."
     do{
         Start-Sleep -s 10
-        if(Get-ItemProperty "C:\Users\Public\Desktop\TeamViewer.lnk" -erroraction 'silentlycontinue')
+        $processList = Get-Process | ? { $_.MainWindowTitle } | Select-Object ProcessName
+
+        if($processList.ProcessName -contains "Ninite")
         {
-            #Nettoie le bureau
+            PrintECT
+            Write-Host "Waiting For Ninite To Be Done... ('CTRL + C' To Stop)"
+            Write-Host "You need to close Ninite when it is done."
+        } else
+        {
+            # Nettoie le bureau
             ## Cette section crée un dossier "Programme" sur le bureau
             ## Tous les logiciels installés sur le bureau seront deplacés dans ce dossier
             mkdir $DesktopPath\Programmes
             Get-Item -Path "C:\Users\Public\Desktop\*.lnk" | Move-Item -Destination $DesktopPath"\Programmes"
 
             Write-Host "Desktop Is Now Clean !"
-        } else
-        {
-            PrintECT
-            Write-Host "Waiting For Ninite To Be Done... ('CTRL + C' To Stop)"
         }
         
     }
-    while (!(Get-ItemProperty $DesktopPath"\Programmes\TeamViewer.lnk" -erroraction 'silentlycontinue'))
+    while ($processList.ProcessName -contains "Ninite")
 
     #Changement du fond d'écran si installation est SonXPlus
     if($installationType -eq 2)
