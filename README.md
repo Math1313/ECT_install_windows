@@ -31,5 +31,4 @@ https://kolbi.cz/blog/2017/10/25/setuserfta-userchoice-hash-defeated-set-file-ty
 * LibreOffice
 * TeamViewer 15
 * Adobe Acrobat Reader
-* Messenger
 * SupportAssist or Lenovo Vantage Commercial
