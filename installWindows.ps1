@@ -385,7 +385,13 @@ function InstallPrograms {
         .\extension\niniteECT.exe
     }elseif ($installationType -eq 2) ## Type 2 est pour Son X Plus
     {
-        .\extension\niniteSXP.exe
+        if($installationPlace -eq 1)
+        {
+            .\extension\niniteSXP.exe
+        }elseif ($installationPlace -eq 2)
+        {
+            .\extension\niniteSXP_Alma.exe
+        }
         # if(isWindows11)
         # {
         #     winget install --id "9WZDNCRF0083" --accept-package-agreements --accept-source-agreements
@@ -393,6 +399,10 @@ function InstallPrograms {
         #     Write-Host "Please Install Messenger Manually"
         # }
     }
+}
+
+function CopyTeamViewer{
+    Copy-Item .\extension\TeamViewerQS.exe C:\Users\Public\Desktop
 }
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
@@ -483,8 +493,14 @@ function CleanDesktop {
             # Nettoie le bureau
             ## Cette section crée un dossier "Programme" sur le bureau
             ## Tous les logiciels installés sur le bureau seront deplacés dans ce dossier
-            mkdir $DesktopPath\Programmes
-            Get-Item -Path "C:\Users\Public\Desktop\*.lnk" | Move-Item -Destination $DesktopPath"\Programmes"
+            if($installationType -eq 2 -and $installationPlace -eq 2)
+            {
+                Remove-Item $DesktopPath"\Microsoft Edge.lnk"
+            }else
+            {
+                mkdir $DesktopPath\Programmes
+                Get-Item -Path "C:\Users\Public\Desktop\*.lnk" | Move-Item -Destination $DesktopPath"\Programmes"
+            }
 
             Write-Host "Desktop Is Now Clean !"
         }
@@ -577,6 +593,8 @@ SetTaskbarSettings
 SetAlimentationSettings
 
 InstallPrograms
+
+CopyTeamViewer
 
 SetDefaultWebBrowser
 
