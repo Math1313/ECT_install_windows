@@ -2,22 +2,22 @@
 Function PrintECT
 {
     Clear-Host
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " __      __.__            .___                      _____                                             "
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "/  \    /  \__| ____    __| _/______  _  ________ _/ ____\___________                                 "
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "\   \/\/   /  |/    \  / __ |/  _ \ \/ \/ /  ___/ \   __\/  _ \_  __ \                                "
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " \        /|  |   |  \/ /_/ (  <_> )     /\___ \   |  | (  <_> )  | \/                                "
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "  \__/\__/ |__|___|  /\____ |\____/ \/\_//______>  |__|  \____/|__|                                   "
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "___________.__                 __                                       ___________           .__     "
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "\_   _____/|  |   ____   _____/  |________  ____   ____  ____   _____   \__    ___/___   ____ |  |__  "
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " |    __)_ |  | _/ __ \_/ ___\   __\_  __ \/  _ \_/ ___\/  _ \ /     \    |    |_/ __ \_/ ___\|  |  \ "
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' " |        \|  |_\  ___/\  \___|  |  |  | \(  <_> )  \__(  <_> )  Y Y  \   |    |\  ___/\  \___|   Y  \"
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "/_________/|____/\_____>\_____>__|  |__|   \____/ \_____>____/|__|_|__/   |____| \_____>\_____>___|__/"
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'DarkBlue' "                                                                                                      "
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red'      '___            __  __          _     _      _   ____  _   ____                                        '
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red'      '| _ )  _  _    |  \/  |  __ _  | |_  | |_   / | |__ / / | |__ /                                       '
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red'      '| _ \ | || |   | |\/| | / _` | |  _| | ` \  | |  |_ \ | |  |_ \                                       '
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red'      '|___/  \_, |   |_|  |_| \__,_|  \__| |_||_| |_| |___/ |_| |___/                                       '
-    Write-Host -BackgroundColor 'Gray' -ForegroundColor 'Red'      '       |__/                                                                                           '
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan' " __      __.__            .___                      _____                                             "
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan' "/  \    /  \__| ____    __| _/______  _  ________ _/ ____\___________                                 "
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan' "\   \/\/   /  |/    \  / __ |/  _ \ \/ \/ /  ___/ \   __\/  _ \_  __ \                                "
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan' " \        /|  |   |  \/ /_/ (  <_> )     /\___ \   |  | (  <_> )  | \/                                "
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan' "  \__/\__/ |__|___|  /\____ |\____/ \/\_//______>  |__|  \____/|__|                                   "
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan' "___________.__                 __                                       ___________           .__     "
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan' "\_   _____/|  |   ____   _____/  |________  ____   ____  ____   _____   \__    ___/___   ____ |  |__  "
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan' " |    __)_ |  | _/ __ \_/ ___\   __\_  __ \/  _ \_/ ___\/  _ \ /     \    |    |_/ __ \_/ ___\|  |  \ "
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan' " |        \|  |_\  ___/\  \___|  |  |  | \(  <_> )  \__(  <_> )  Y Y  \   |    |\  ___/\  \___|   Y  \"
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan' "/_________/|____/\_____>\_____>__|  |__|   \____/ \_____>____/|__|_|__/   |____| \_____>\_____>___|__/"
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan' "                                                                                                      "
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan'      '___            __  __          _     _      _   ____  _   ____                                        '
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan'      '| _ )  _  _    |  \/  |  __ _  | |_  | |_   / | |__ / / | |__ /                                       '
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan'      '| _ \ | || |   | |\/| | / _` | |  _| | ` \  | |  |_ \ | |  |_ \                                       '
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan'      '|___/  \_, |   |_|  |_| \__,_|  \__| |_||_| |_| |___/ |_| |___/                                       '
+    Write-Host -BackgroundColor 'Black' -ForegroundColor 'Cyan'      '       |__/                                                                                           '
 }
 
 ## Ask the user the type of installation he wants
@@ -385,13 +385,26 @@ function InstallPrograms {
         .\extension\niniteECT.exe
     }elseif ($installationType -eq 2) ## Type 2 est pour Son X Plus
     {
-        .\extension\niniteSXP.exe
+        if($installationPlace -eq 1)
+        {
+            .\extension\niniteSXP.exe
+        }elseif ($installationPlace -eq 2)
+        {
+            .\extension\niniteSXP_Alma.exe
+        }
         # if(isWindows11)
         # {
         #     winget install --id "9WZDNCRF0083" --accept-package-agreements --accept-source-agreements
         # }else{
         #     Write-Host "Please Install Messenger Manually"
         # }
+    }
+}
+
+function CopyTeamViewer{
+    if($installationType -eq 2)
+    {
+        Copy-Item .\extension\TeamViewerQS.exe C:\Users\Public\Desktop
     }
 }
 # ------------------------------------------------------------------------------------------------------------------ #
@@ -439,7 +452,7 @@ function SetDefaultPDFReader{
         Start-Sleep -s 10
         if(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\AcroRd32.exe' -erroraction 'silentlycontinue')
         {
-            .\extension\SetUserFTA\SetUserFTA.exe .pdf Acrobat.Document.DC
+            .\extension\SetUserFTA\SetUserFTA.exe .pdf AcroExch.Document.DC
             "Adobe Acrobate Reader Is Installed And Set As Default !"
             break
         }
@@ -461,6 +474,17 @@ function SetDefaultPDFReader{
 Function SetOtherExtension{
     .\extension\SetUserFTA\SetUserFTA.exe .\extension\SetUserFTA\SetUserFTAconfig.txt
 }
+
+function TaskbarConfig {
+    if(isWindows11)
+    {
+        Import-StartLayout -layoutpath .\extension\taskbar.xml -Mountpath C:\
+    } else{
+        New-Item -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\' -Name 'Windows Search' | Out-Null
+        New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name 'AllowCortana' -PropertyType DWORD -Value '0' | Out-Null
+        Import-StartLayout -layoutpath .\extension\taskbar10.xml -Mountpath C:\
+    }
+}
 # ------------------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------------------ #
 function CleanDesktop {
@@ -480,11 +504,18 @@ function CleanDesktop {
             Write-Host "You need to close Ninite when it is done."
         } else
         {
-            # Nettoie le bureau
-            ## Cette section crée un dossier "Programme" sur le bureau
-            ## Tous les logiciels installés sur le bureau seront deplacés dans ce dossier
-            mkdir $DesktopPath\Programmes
-            Get-Item -Path "C:\Users\Public\Desktop\*.lnk" | Move-Item -Destination $DesktopPath"\Programmes"
+            Nettoie le bureau
+            # Cette section crée un dossier "Programme" sur le bureau
+            # Tous les logiciels installés sur le bureau seront deplacés dans ce dossier
+            if($installationType -eq 1)
+            {
+                mkdir $DesktopPath\Programmes
+                Get-Item -Path "C:\Users\Public\Desktop\*.lnk" | Move-Item -Destination $DesktopPath"\Programmes"
+            }else
+            {
+                Remove-Item $DesktopPath"\Microsoft Edge.lnk"
+            }
+            
 
             Write-Host "Desktop Is Now Clean !"
         }
@@ -578,11 +609,15 @@ SetAlimentationSettings
 
 InstallPrograms
 
+CopyTeamViewer
+
 SetDefaultWebBrowser
 
 SetDefaultPDFReader
 
 SetOtherExtension
+
+TaskbarConfig
 
 CleanDesktop
 
